@@ -45,9 +45,9 @@ La regla no se modifica después de ver resultados.
 
 ## 5. Protocolo de la prueba (2025-2026)
 
-- La selección (`lab03_seleccion.py`) **no carga la prueba**: usa `features.train_split`, que devuelve solo el entrenamiento. Hay una prueba automática que lo vigila.
+- La selección (`python LAB03.py --fase seleccion`) **no carga la prueba**: usa `features.train_split`, que devuelve solo el entrenamiento. Hay una prueba automática que vigila que el código anterior al cierre no mencione la partición de prueba.
 - La decisión queda congelada en `reports/lab03_decision.json` y se versiona **antes** de tocar la prueba.
-- El cierre (`lab03_cierre.py`) evalúa **una sola vez** el modelo elegido y se niega a repetirse si ya existe `reports/lab03_test_final.json`.
+- El cierre (`python LAB03.py --fase cierre`) lee la decisión congelada, evalúa **una sola vez** el modelo elegido y se niega a repetirse si ya existe `reports/lab03_test_final.json`.
 - En el cierre se muestran, solo como contexto y sin poder cambiar la decisión, el baseline y el SVM elegido en LAB02.
 
 ## 6. Limitaciones declaradas de antemano
@@ -55,3 +55,13 @@ La regla no se modifica después de ver resultados.
 - **La prueba 2025-2026 ya se vio en LAB02** (Dummy, SVM base y SVM del grid). No es virgen en sentido estricto. Por eso esas cifras **no intervienen en ninguna decisión de LAB03**: los modelos se comparan solo con la validación cruzada.
 - Los tiempos y tamaños dependen del equipo y de la versión de las librerías. La decisión se calcula con los costos medidos en cada ejecución.
 - Con 4 folds, la desviación estándar es una estimación ruidosa.
+
+## 7. Adenda: versión fiel al guion `LAB03.py` (antes de ejecutarla)
+
+Esta adenda se versiona antes de ejecutar la versión fiel al guion.
+
+- **Qué cambia:** la implementación pasa a un solo archivo, `LAB03.py`, que sigue los pasos 2-10 del guion entregado. Reemplaza a `lab03_seleccion.py`, `lab03_cierre.py` y `catalog.py` de la primera versión modular (que sigue en el historial de git).
+- **Qué no cambia:** las secciones 1-6 de este documento: dataset, target, exclusiones, partición, métrica principal (F1 macro), clase prioritaria (alta demanda, recall), 3 repeticiones con mediana, 1 hilo, regla de decisión con k = 1 y protocolo de la prueba.
+- **Modelos:** los del guion (`logistic`, `svm_c1`, `svm_c10`, `rf_100`, `rf_300`, `boost`) con `probability=True` en las SVM, más `svm_pca` y el baseline `dummy`. Deja de estar `svm_c10_g01`; la SVM de LAB02 (C=10, gamma=0.1) se evalúa solo en el cierre, como contexto.
+- **Honestidad sobre lo ya visto:** la primera versión modular ya se ejecutó y sus resultados se conocían al escribir esta adenda. Ninguna regla de este documento se movió a partir de ellos; lo que cambia es el conjunto de modelos y el motor de las SVM.
+- **Cada desviación respecto al guion** está marcada en el código (`CAMBIO n`, `ADICIÓN n`) y explicada en `README.md`.
