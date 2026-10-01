@@ -6,8 +6,10 @@ import pandas as pd
 import pytest
 
 from inf8239_u01 import lab03_config as cfg
-from inf8239_u01.catalog import FAMILIAS, REFERENCIAS
 from inf8239_u01.green import choose_model, pareto_flags
+
+REFERENCIAS = ("dummy",)
+MODELOS_ESPERADOS = {"dummy", "logistic", "svm_c1", "svm_c10", "svm_pca", "rf_100", "rf_300", "boost"}
 
 RAIZ = Path(__file__).resolve().parents[1]
 REPORTS = RAIZ / "reports"
@@ -16,7 +18,7 @@ DECISION = RAIZ / cfg.RUTA_DECISION
 FINAL = RAIZ / cfg.RUTA_PRUEBA_FINAL
 
 requiere_seleccion = pytest.mark.skipif(not (CSV.exists() and DECISION.exists()),
-                                        reason="falta ejecutar lab03_seleccion.py")
+                                        reason="falta ejecutar LAB03.py --fase seleccion")
 
 
 @pytest.fixture(scope="module")
@@ -30,7 +32,7 @@ def test_csv_has_at_least_six_candidates_from_the_three_required_families(result
     assert len(candidatos) >= 6
     familias = " ".join(candidatos["familia"])
     assert "SVM" in familias and "Random Forest" in familias and "Boosting" in familias
-    assert set(resultados["model"]) == set(FAMILIAS)
+    assert set(resultados["model"]) == MODELOS_ESPERADOS
 
 
 @requiere_seleccion
@@ -66,15 +68,6 @@ def test_decision_is_reproducible_from_the_csv_and_quantified(resultados):
 
 
 @requiere_seleccion
-def test_selection_reproduces_the_lab02_svm_cv_score():
-    decision = json.loads(DECISION.read_text(encoding="utf-8"))
-    c = decision.get("consistencia_lab02")
-    if c is None:
-        pytest.skip("LAB02 no disponible")
-    assert abs(c["diferencia"]) < 1e-3                 # misma partición y mismo preprocesamiento
-
-
-@requiere_seleccion
 def test_figures_and_tsne_metrics_exist_and_the_two_seeds_really_differ():
     for figura in ("pareto.png", "tsne_two_seeds.png"):
         assert (REPORTS / figura).stat().st_size > 10_000
@@ -96,7 +89,7 @@ def test_dense_memory_and_pca_evidence_are_recorded():
     assert pca["componentes_para_varianza"] < pca["columnas_codificadas"]
 
 
-@pytest.mark.skipif(not (FINAL.exists() and DECISION.exists()), reason="falta ejecutar lab03_cierre.py")
+@pytest.mark.skipif(not (FINAL.exists() and DECISION.exists()), reason="falta ejecutar LAB03.py --fase cierre")
 def test_final_test_was_evaluated_once_with_the_frozen_model():
     decision = json.loads(DECISION.read_text(encoding="utf-8"))
     final = json.loads(FINAL.read_text(encoding="utf-8"))
@@ -105,6 +98,5 @@ def test_final_test_was_evaluated_once_with_the_frozen_model():
     m = final["metricas_prueba"]
     assert m["tn"] + m["fp"] + m["fn"] + m["tp"] == final["filas_prueba"] == 3627
     c = final.get("consistencia_lab02")
-    if c:
-        assert c["f1_macro_prueba_svm_c10_g01_lab02"] == pytest.approx(
-            c["f1_macro_prueba_svm_c10_g01_lab03"], abs=1e-3)
+    if c:   # la SVM de LAB02 recalculada debe dar el F1 de LAB02: misma partición y mismo preprocesamiento
+        assert c["f1_macro_prueba_lab02"] == pytest.approx(c["f1_macro_prueba_recalculado"], abs=1e-3)

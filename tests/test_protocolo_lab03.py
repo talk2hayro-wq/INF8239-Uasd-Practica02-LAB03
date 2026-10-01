@@ -12,13 +12,16 @@ CSV_REAL = RAIZ / "data" / "raw" / "dataset.csv"
 
 
 def test_selection_code_never_touches_the_test_partition():
-    """La selección solo puede ver entrenamiento: ni X_test, ni y_test, ni temporal_split."""
-    for archivo in ("lab03_seleccion.py", "src/inf8239_u01/explore.py",
-                    "src/inf8239_u01/catalog.py"):
-        texto = (RAIZ / archivo).read_text(encoding="utf-8")
-        for prohibido in ("X_test", "y_test", "temporal_split"):
-            assert prohibido not in texto, f"{archivo} menciona {prohibido}"
-    assert "train_split" in (RAIZ / "lab03_seleccion.py").read_text(encoding="utf-8")
+    """Todo lo anterior al cierre solo puede ver entrenamiento: ni X_test, ni y_test, ni temporal_split."""
+    texto = (RAIZ / "LAB03.py").read_text(encoding="utf-8")
+    antes_del_cierre = texto.split("# 11. CIERRE")[0]
+    for prohibido in ("X_test", "y_test", "Xte", "yte", "temporal_split"):
+        assert prohibido not in antes_del_cierre, f"LAB03.py menciona {prohibido} antes del cierre"
+    assert "train_split" in antes_del_cierre
+    assert "temporal_split" in texto.split("# 11. CIERRE")[1]       # y la prueba solo aparece en el cierre
+    explore = (RAIZ / "src/inf8239_u01/explore.py").read_text(encoding="utf-8")
+    for prohibido in ("X_test", "y_test", "temporal_split"):
+        assert prohibido not in explore
 
 
 def test_train_split_is_exactly_the_lab02_training_partition():

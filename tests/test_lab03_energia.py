@@ -40,8 +40,11 @@ def test_energy_script_only_uses_training_data():
         assert prohibido not in texto
 
 
-@pytest.mark.skipif(not (hay_codecarbon and CSV_REAL.exists()),
-                    reason="requiere codecarbon y data/raw/dataset.csv")
+hay_modelos = any((RAIZ / "reports" / "models").glob("dummy.joblib"))
+
+
+@pytest.mark.skipif(not (hay_codecarbon and CSV_REAL.exists() and hay_modelos),
+                    reason="requiere codecarbon, data/raw/dataset.csv y reports/models (LAB03.py --fase seleccion)")
 def test_energy_smoke_run_writes_csv_and_metadata_with_caveats(tmp_path):
     salida = tmp_path / "energia.csv"
     r = _ejecutar("--modelos", "dummy", "logistic", "--repeticiones", "1", "--salida", str(salida))

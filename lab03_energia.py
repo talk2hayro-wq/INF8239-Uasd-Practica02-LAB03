@@ -2,7 +2,8 @@
 
 Ejecución (desde la raíz del proyecto):
     pip install -r requirements-energia.txt
-    python lab03_energia.py                          # los 9 modelos, 3 repeticiones
+    python LAB03.py --fase seleccion                 # antes: deja los modelos en reports/models
+    python lab03_energia.py                          # todos esos modelos, 3 repeticiones
     python lab03_energia.py --modelos svm_c1 boost --repeticiones 5
 
 IMPORTANTE (alcance y límites):
@@ -31,7 +32,7 @@ from pathlib import Path
 parser = argparse.ArgumentParser(description="Estimación de energía y CO2eq con CodeCarbon")
 parser.add_argument("--pais", default="DOM", help="código ISO-3 del país (def. DOM)")
 parser.add_argument("--repeticiones", type=int, default=3, help="ciclos ajuste+inferencia por modelo")
-parser.add_argument("--modelos", nargs="*", default=None, help="subconjunto del catálogo")
+parser.add_argument("--modelos", nargs="*", default=None, help="subconjunto de los modelos de reports/models")
 parser.add_argument("--modo", choices=["machine", "process"], default="machine",
                     help="machine: todo el equipo (def. de CodeCarbon); process: solo este proceso")
 parser.add_argument("--salida", default="reports/lab03_energia.csv", help="CSV de salida")
@@ -43,16 +44,22 @@ try:
 except ImportError:
     sys.exit("Falta CodeCarbon. Instala con: pip install -r requirements-energia.txt")
 
+import joblib
 import pandas as pd
 from sklearn.base import clone
 from threadpoolctl import threadpool_limits
 
 from src.inf8239_u01 import lab03_config as cfg
-from src.inf8239_u01.catalog import FAMILIAS, build_catalog
 from src.inf8239_u01.data import URL_JAC, clean_jac, ensure_dataset, load_raw
 from src.inf8239_u01.features import add_calendar_features, build_target, train_split
 
-catalogo = build_catalog()
+# Los modelos salen de LAB03.py (una sola definición): se cargan los .joblib y se clonan SIN ajustar
+modelos_dir = Path("reports/models")
+rutas = {p.stem: p for p in sorted(modelos_dir.glob("*.joblib"))}
+if not rutas:
+    sys.exit("Faltan los modelos de reports/models: ejecuta primero `python LAB03.py --fase seleccion`.")
+catalogo = {nombre: clone(joblib.load(ruta)) for nombre, ruta in rutas.items()}
+FAMILIAS = pd.read_csv("reports/green_ai_results.csv").set_index("model")["familia"].to_dict()
 nombres = args.modelos or list(catalogo)
 desconocidos = [n for n in nombres if n not in catalogo]
 if desconocidos:

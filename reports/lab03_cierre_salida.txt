@@ -1,8 +1,0 @@
-Decisión congelada: svm_c1 (referencia de mayor F1 CV: svm_c10_g01)
-train (16344, 4) | test (3627, 4) (positivos 0.248)
-             f1_macro  f1_alta  precision_alta  recall_alta  accuracy  roc_auc      tn     fp     fn     tp
-svm_c1         0.7615   0.6256          0.7372       0.5434    0.8390   0.8655  2555.0  174.0  410.0  488.0
-dummy          0.4294   0.0000          0.0000       0.0000    0.7524   0.5000  2729.0    0.0  898.0    0.0
-svm_c10_g01    0.7595   0.6249          0.7139       0.5557    0.8348   0.8613  2529.0  200.0  399.0  499.0
-Consistencia con LAB02: {'f1_macro_prueba_svm_c10_g01_lab02': 0.7595, 'f1_macro_prueba_svm_c10_g01_lab03': 0.7595}
-Resultado final guardado en reports/lab03_test_final.json
