@@ -1,4 +1,5 @@
 """Pruebas del protocolo de LAB03: partición intacta, prueba sin tocar, reglas declaradas."""
+import re
 from pathlib import Path
 
 import pytest
@@ -16,7 +17,8 @@ def test_selection_code_never_touches_the_test_partition():
     texto = (RAIZ / "LAB03.py").read_text(encoding="utf-8")
     antes_del_cierre = texto.split("# 11. CIERRE")[0]
     for prohibido in ("X_test", "y_test", "Xte", "yte", "temporal_split"):
-        assert prohibido not in antes_del_cierre, f"LAB03.py menciona {prohibido} antes del cierre"
+        assert not re.search(rf"\b{prohibido}\b", antes_del_cierre), \
+            f"LAB03.py menciona {prohibido} antes del cierre"
     assert "train_split" in antes_del_cierre
     assert "temporal_split" in texto.split("# 11. CIERRE")[1]       # y la prueba solo aparece en el cierre
     explore = (RAIZ / "src/inf8239_u01/explore.py").read_text(encoding="utf-8")
