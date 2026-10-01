@@ -1,0 +1,69 @@
+Dataset: data/raw/dataset.csv
+(19971, 6)
+aeropuerto_original      str
+entrada                  str
+salida                   str
+dia                    int64
+mes_nombre               str
+anio                   int64
+dtype: object
+  aeropuerto_original entrada salida  dia mes_nombre  anio
+0           Del Cibao    2136   1956    1      Enero  2018
+1           Del Cibao    2017   2562    2      Enero  2018
+2           Del Cibao    2490   2485    3      Enero  2018
+3           Del Cibao    1649   1385    4      Enero  2018
+4           Del Cibao     821   1324    5      Enero  2018
+                aeropuerto_original entrada salida  dia mes_nombre  anio
+19966  Santo Domingo - Las Américas    8341   7551   26      Junio  2026
+19967  Santo Domingo - Las Américas    8859   8662   27      Junio  2026
+19968  Santo Domingo - Las Américas    9141   8988   28      Junio  2026
+19969  Santo Domingo - Las Américas    8826   7996   29      Junio  2026
+19970  Santo Domingo - Las Américas    9301   9279   30      Junio  2026
+Valores '-' : {'entrada': 736, 'salida': 586}
+Duplicados exactos: 0
+Aeropuertos (nombres originales): 11
+Aeropuertos armonizados: 7
+Duplicados aeropuerto-fecha: 0
+alta_demanda
+0    14992
+1     4979
+Name: count, dtype: int64
+Variables usadas: ['aeropuerto', 'mes', 'dia_semana', 'dia']
+Excluidas: ['entrada', 'salida', 'total', 'fecha', 'anio', 'umbral_p75', 'alta_demanda']
+train: (16344, 4) positivos: 0.25
+test : (3627, 4) positivos: 0.248
+          f1_macro  f1_alta  precision_alta  ...     fp     fn     tp
+dummy       0.4294   0.0000          0.0000  ...    0.0  898.0    0.0
+svm_base    0.7615   0.6256          0.7372  ...  174.0  410.0  488.0
+
+[2 rows x 10 columns]
+              precision    recall  f1-score   support
+
+           0     0.8617    0.9362    0.8974      2729
+           1     0.7372    0.5434    0.6256       898
+
+    accuracy                         0.8390      3627
+   macro avg     0.7994    0.7398    0.7615      3627
+weighted avg     0.8309    0.8390    0.8301      3627
+
+{'model__C': 10, 'model__gamma': 0.1}
+CV f1_macro: 0.6968 (103 s)
+   param_model__C param_model__gamma  ...  mean_train_score  rank_test_score
+0            10.0                0.1  ...            0.7771                1
+1            10.0              scale  ...            0.8070                2
+2             1.0              scale  ...            0.7683                3
+3             1.0                0.1  ...            0.6795                4
+4             0.1              scale  ...            0.4861                5
+5            10.0               0.01  ...            0.4586                6
+6             0.1                0.1  ...            0.4266                7
+7             0.1               0.01  ...            0.4266                7
+8             1.0               0.01  ...            0.4266                7
+
+[9 rows x 6 columns]
+          f1_macro  f1_alta  precision_alta  ...     fp     fn     tp
+dummy       0.4294   0.0000          0.0000  ...    0.0  898.0    0.0
+svm_base    0.7615   0.6256          0.7372  ...  174.0  410.0  488.0
+svm_grid    0.7595   0.6249          0.7139  ...  200.0  399.0  499.0
+
+[3 rows x 10 columns]
+Evidencias guardadas en /home/claude/INF8239_U01/reports

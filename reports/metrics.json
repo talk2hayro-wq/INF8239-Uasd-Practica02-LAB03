@@ -1,0 +1,61 @@
+{
+  "target": "alta_demanda",
+  "features": [
+    "aeropuerto",
+    "mes",
+    "dia_semana",
+    "dia"
+  ],
+  "train": {
+    "filas": 16344,
+    "positivos": 0.2497
+  },
+  "test": {
+    "filas": 3627,
+    "positivos": 0.2476
+  },
+  "mejores_hiperparametros": {
+    "model__C": 10.0,
+    "model__gamma": 0.1
+  },
+  "cv_f1_macro": 0.6968,
+  "tiempo_grid_s": 103.3,
+  "metricas_test": {
+    "dummy": {
+      "f1_macro": 0.4294,
+      "f1_alta": 0.0,
+      "precision_alta": 0.0,
+      "recall_alta": 0.0,
+      "accuracy": 0.7524,
+      "roc_auc": null,
+      "tn": 2729.0,
+      "fp": 0.0,
+      "fn": 898.0,
+      "tp": 0.0
+    },
+    "svm_base": {
+      "f1_macro": 0.7615,
+      "f1_alta": 0.6256,
+      "precision_alta": 0.7372,
+      "recall_alta": 0.5434,
+      "accuracy": 0.839,
+      "roc_auc": 0.8655,
+      "tn": 2555.0,
+      "fp": 174.0,
+      "fn": 410.0,
+      "tp": 488.0
+    },
+    "svm_grid": {
+      "f1_macro": 0.7595,
+      "f1_alta": 0.6249,
+      "precision_alta": 0.7139,
+      "recall_alta": 0.5557,
+      "accuracy": 0.8348,
+      "roc_auc": 0.8613,
+      "tn": 2529.0,
+      "fp": 200.0,
+      "fn": 399.0,
+      "tp": 499.0
+    }
+  }
+}
