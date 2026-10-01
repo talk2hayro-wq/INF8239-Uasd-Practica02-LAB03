@@ -144,7 +144,7 @@ El orden es deliberado: la declaración precede a todo el código de modelos, y 
 
 # LAB03 · Ensambles, reducción dimensional, mediciones repetidas y frontera de Pareto
 
-Amplía el problema de LAB02 (¿un día será de **alta demanda** en un aeropuerto?) comparando **8 configuraciones más un baseline** (SVM, Random Forest y boosting, con y sin PCA), repitiendo las mediciones de costo y decidiendo con la **frontera de Pareto**. Se reutilizan sin cambios el dataset, el target, las exclusiones y la partición temporal de LAB02. Todo el flujo está en un solo archivo, **`LAB03.py`**, que sigue los pasos 2 a 10 del guion entregado; lo que se separó del guion está marcado en el código y explicado más abajo.
+Amplía el problema de LAB02 (¿un día será de **alta demanda** en un aeropuerto?) comparando **7 configuraciones más un baseline** (SVM, Random Forest y boosting, con y sin PCA), repitiendo las mediciones de costo y decidiendo con la **frontera de Pareto**. Se reutilizan sin cambios el dataset, el target, las exclusiones y la partición temporal de LAB02. Todo el flujo está en un solo archivo, **`LAB03.py`**, que sigue los pasos 2 a 10 del guion entregado; lo que se separó del guion está marcado en el código y explicado más abajo.
 
 > Ejercicio académico. Los tiempos dependen del equipo donde se ejecutan (ver «Cómo leer los tiempos»).
 
