@@ -14,6 +14,7 @@
 | **Cobertura temporal** | 2018-01-01 a 2026-06-30 |
 | **Cobertura geográfica** | 7 aeropuertos internacionales de República Dominicana |
 | **Granularidad** | Un registro por aeropuerto y día (los aeropuertos pequeños omiten días sin operaciones) |
+| **Licencia** | Open Data Commons Open Database License (ODbL) v1.0 — https://opendatacommons.org/licenses/odbl/1-0/ |
 | **Datos personales** | No contiene datos personales: son conteos agregados diarios |
 
 ## Cómo se obtuvo
@@ -29,10 +30,17 @@
 
 ## Licencia y condiciones de uso
 
-- **Licencia explícita: no verificada.** Ni el archivo ni las páginas consultadas de la JAC declaran una licencia. Antes de redistribuir el dataset o publicarlo fuera del curso, debe confirmarse con la JAC o en la ficha del conjunto de datos en datos.gob.do.
-- **Uso en este proyecto:** exclusivamente académico (curso INF-8239), con atribución a la fuente.
-- **Por eso `data/raw/` no se versiona** (ver `.gitignore`): el repositorio no redistribuye el CSV; quien lo clone lo descarga desde la fuente.
-- **Atribución sugerida:** «Junta de Aviación Civil (JAC), República Dominicana. Movimiento de Entrada y Salida de Pasajeros por Aeropuertos, 2018-2026. Consultado el 2026-09-29.»
+- **Licencia del dataset: Open Data Commons Open Database License (ODbL) v1.0.** La licencia fue indicada por la autora o el autor del proyecto; no pude confirmarla en las páginas de la JAC ni en el portal datos.gob.do que consulté. Conviene contrastarla con la ficha oficial del conjunto de datos antes de la entrega.
+- **Qué exige la ODbL** (resumen general, no es asesoría legal; el texto completo manda):
+  - **Atribución:** citar la fuente y mantener el aviso de licencia al usar o redistribuir la base de datos o una base derivada.
+  - **Compartir igual (share-alike):** si se publica una base de datos *derivada* (por ejemplo, el dataset limpio y armonizado), debe ofrecerse bajo la misma ODbL.
+  - **Mantener abierto:** no se pueden aplicar restricciones técnicas que impidan a otros ejercer los derechos de la licencia.
+  - **Obras producidas** (gráficos, tablas, resultados de un modelo) pueden compartirse con el aviso de atribución, sin obligación de share-alike.
+- **Uso en este proyecto:** académico (curso INF-8239), con atribución a la fuente.
+- **Sobre `data/raw/`:** la ODbL permite redistribuir el dato con atribución y share-alike, pero se mantiene fuera del control de versiones para no duplicar la fuente y evitar versiones desactualizadas: el CSV se descarga siempre desde la JAC (ver `.gitignore`).
+- **Aviso de atribución sugerido:**
+  > Contiene información de la Junta de Aviación Civil (JAC), República Dominicana — «Movimiento de Entrada y Salida de Pasajeros por Aeropuertos, 2018-2026», consultada el 2026-09-29, disponible bajo la Open Database License (ODbL) v1.0.
+- **Licencia del código y del texto de este repositorio:** no se declara ninguna (trabajo académico). La licencia ODbL aplica al dataset, no al código.
 
 ## Calidad y advertencias de la fuente
 

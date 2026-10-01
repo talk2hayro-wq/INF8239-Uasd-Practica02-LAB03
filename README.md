@@ -62,7 +62,7 @@ path = ensure_dataset(URL_JAC)
 
 Fuente: `https://jac.gob.do/wp-content/uploads/2026/07/Movimiento-de-Entrada-y-Salida-de-Pasajeros-por-Aeropuertos-Junta-de-Aviacion-Civil-JAC-2018-2026.csv`
 
-Procedencia, hash, fecha de acceso y estado de la licencia: [`docs/PROCEDENCIA_LICENCIA.md`](docs/PROCEDENCIA_LICENCIA.md). **La licencia no está verificada**; por eso el CSV no se sube al repositorio.
+Procedencia, hash, fecha de acceso, licencia y aviso de atribución: [`docs/PROCEDENCIA_LICENCIA.md`](docs/PROCEDENCIA_LICENCIA.md). **Licencia del dataset: ODbL v1.0** (Open Data Commons Open Database License). El CSV no se sube al repositorio: se descarga siempre desde la fuente.
 
 ## Definiciones
 
@@ -111,9 +111,14 @@ También puede abrirse el notebook en Jupyter o VS Code con el kernel «INF-8239
 
 Commits pequeños y con mensaje descriptivo, en este orden: estructura del proyecto → datos → pruebas de datos → target y partición → pruebas del target → modelos y evaluación → pruebas de modelos → `pract02.py` con evidencias → documentación de datos → notebook → README. Consultar con `git log --oneline`.
 
+## Licencia y atribución
+
+- **Dataset:** Open Data Commons Open Database License (ODbL) v1.0, con atribución a la Junta de Aviación Civil (JAC). Aviso sugerido y condiciones (atribución, share-alike, mantener abierto) en [`docs/PROCEDENCIA_LICENCIA.md`](docs/PROCEDENCIA_LICENCIA.md).
+- **Código y texto del repositorio:** sin licencia declarada (trabajo académico).
+
 ## Limitaciones y siguientes pasos
 
 - Solo 4 variables de calendario; faltan feriados, temporadas y calendario de vuelos.
 - El óptimo del grid está en el borde (C=10, gamma=0.1): ampliar la búsqueda.
 - Ajustar el umbral de decisión o `class_weight` si el falso negativo pesa más, decidiéndolo con validación temporal y no con el test.
-- Confirmar la licencia del dataset antes de redistribuirlo.
+- Si se publica el dataset limpio (una base de datos derivada), debe ofrecerse bajo la misma ODbL y con atribución a la JAC.
