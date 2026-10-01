@@ -1,0 +1,28 @@
+{
+  "dummy": {},
+  "logreg": {
+    "C": 100
+  },
+  "linearsvc": {
+    "C": 100
+  },
+  "svm_linear": {
+    "C": 10
+  },
+  "svm_rbf": {
+    "C": 10000,
+    "gamma": 0.0001
+  },
+  "svm_rbf_pca": {
+    "C": 10000,
+    "gamma": 0.0001
+  },
+  "rf": {
+    "max_depth": 12,
+    "n_estimators": 300
+  },
+  "hgb": {
+    "learning_rate": 0.2,
+    "max_iter": 200
+  }
+}

@@ -1,0 +1,3 @@
+modelo,cv_f1_macro,cv_f1_std,cv_accuracy,holdout_f1_macro,holdout_accuracy,holdout_pr_auc_macro
+dummy,0.1,0.0,0.25,0.1,0.25,0.25
+logreg,0.9479828614589799,0.009781841195227644,0.9481250000000001,0.9649863177272501,0.965,0.9960797645860322

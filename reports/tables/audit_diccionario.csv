@@ -1,0 +1,22 @@
+variable,descripción,unidad,tipo,min,max,media,ceros,outliers_IQR,nulos
+battery_power,Energía total que la batería puede almacenar,mAh,entera,501.0,1998.0,1238.5185,0,0,0
+blue,Tiene Bluetooth,0/1,binaria,0.0,1.0,0.495,1010,0,0
+clock_speed,Velocidad a la que el microprocesador ejecuta instrucciones,GHz,continua,0.5,3.0,1.52225,0,0,0
+dual_sim,Soporta doble SIM,0/1,binaria,0.0,1.0,0.5095,981,0,0
+fc,Resolución de la cámara frontal,Mpx,entera,0.0,19.0,4.3095,474,18,0
+four_g,Tiene 4G,0/1,binaria,0.0,1.0,0.5215,957,0,0
+int_memory,Memoria interna,GB,entera,2.0,64.0,32.0465,0,0,0
+m_dep,Profundidad (grosor) del móvil,cm,continua,0.1,1.0,0.50175,0,0,0
+mobile_wt,Peso del móvil,g,entera,80.0,200.0,140.249,0,0,0
+n_cores,Número de núcleos del procesador,conteo,entera,1.0,8.0,4.5205,0,0,0
+pc,Resolución de la cámara principal,Mpx,entera,0.0,20.0,9.9165,101,0,0
+px_height,Alto de la resolución de pantalla,px,entera,0.0,1960.0,645.108,2,2,0
+px_width,Ancho de la resolución de pantalla,px,entera,500.0,1998.0,1251.5155,0,0,0
+ram,Memoria RAM,MB,entera,256.0,3998.0,2124.213,0,0,0
+sc_h,Alto de la pantalla,cm,entera,5.0,19.0,12.3065,0,0,0
+sc_w,Ancho de la pantalla,cm,entera,0.0,18.0,5.767,180,0,0
+talk_time,Duración máxima de una carga en llamada,horas,entera,2.0,20.0,11.011,0,0,0
+three_g,Tiene 3G,0/1,binaria,0.0,1.0,0.7615,477,0,0
+touch_screen,Pantalla táctil,0/1,binaria,0.0,1.0,0.503,994,0,0
+wifi,Tiene WiFi,0/1,binaria,0.0,1.0,0.507,986,0,0
+price_range,"Rango de precio (0 bajo, 1 medio, 2 alto, 3 muy alto)",clase,objetivo ordinal,0.0,3.0,1.5,500,0,0

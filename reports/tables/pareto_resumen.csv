@@ -1,0 +1,9 @@
+modelo,F1 CV,F1 hold-out,frontera tiempo de ajuste,frontera inferencia,frontera memoria pico de ajuste,frontera tamaño serializado,FRONTERA GLOBAL (CV),FRONTERA GLOBAL (hold-out)
+DummyClassifier,0.1,0.1,sí,sí,no,sí,SÍ,SÍ
+LogisticRegression,0.9631555106619538,0.9825111270596047,sí,sí,sí,sí,SÍ,SÍ
+LinearSVC,0.8632978180389971,0.833648732464996,sí,sí,no,sí,SÍ,SÍ
+SVC lineal (OvO),0.964961651623738,0.9749993749843746,sí,sí,sí,sí,SÍ,no
+SVC RBF,0.953718855454847,0.9699992499812496,no,no,no,no,no,no
+PCA + SVC RBF,0.9592438696221418,0.9573396900789496,no,no,no,no,no,no
+RandomForest,0.8737282346173,0.8848075814710713,no,no,no,no,no,no
+HistGradientBoosting,0.9012872005426844,0.9276592119010896,no,no,no,no,no,no

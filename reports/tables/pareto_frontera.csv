@@ -1,0 +1,9 @@
+modelo,"Tiempo de ajuste (s, mediana) [CV]",Inferencia (ms / 1000 filas) [CV],Memoria pico de ajuste (MiB) [CV],Tamaño serializado (KiB) [CV],GLOBAL (4 costos) [CV],"Tiempo de ajuste (s, mediana) [hold-out]",Inferencia (ms / 1000 filas) [hold-out],Memoria pico de ajuste (MiB) [hold-out],Tamaño serializado (KiB) [hold-out],GLOBAL (4 costos) [hold-out]
+dummy,True,True,False,True,True,True,True,False,True,True
+logreg,True,True,True,True,True,True,True,True,True,True
+linearsvc,True,True,False,True,True,True,True,False,True,True
+svm_linear,True,True,True,True,True,False,False,False,False,False
+svm_rbf,False,False,False,False,False,False,False,False,False,False
+svm_rbf_pca,False,False,False,False,False,False,False,False,False,False
+rf,False,False,False,False,False,False,False,False,False,False
+hgb,False,False,False,False,False,False,False,False,False,False
