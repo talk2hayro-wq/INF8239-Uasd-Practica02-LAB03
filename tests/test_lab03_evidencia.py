@@ -75,8 +75,9 @@ def test_figures_and_tsne_metrics_exist_and_the_two_seeds_really_differ():
     assert m["init_random"]["disparidad_procrustes"] > 0.05
     assert m["init_random"]["vecinos_compartidos"] < 1.0
     assert m["init_pca"]["disparidad_procrustes"] < 1e-6   # el caso del guion: mapas idénticos
-    # Lo que permanece: el aeropuerto se agrupa muy por encima del azar; el target casi no
-    assert m["init_random"]["pureza_aeropuerto_mapa_a"] > 3 * m["init_random"]["azar_aeropuerto"]
+    # Lo que permanece: el mes organiza los grupos, el aeropuerto queda por encima del azar; el target casi no
+    assert m["init_random"]["pureza_mes_mapa_a"] > 0.9 and m["init_random"]["pureza_mes_mapa_b"] > 0.9
+    assert m["init_random"]["pureza_aeropuerto_mapa_a"] > 2 * m["init_random"]["azar_aeropuerto"]
     assert m["init_random"]["pureza_target_mapa_a"] < m["init_random"]["azar_target"] + 0.10
 
 

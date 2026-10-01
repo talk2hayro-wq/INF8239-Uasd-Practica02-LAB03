@@ -184,20 +184,23 @@ if SELECCION:
                                   init=init, learning_rate="auto").fit_transform(scaled)
                        for seed in cfg.TSNE_SEMILLAS}
     a, b = cfg.TSNE_SEMILLAS
+    extras = {"mes": sample["mes"].to_numpy(), "dia_semana": sample["dia_semana"].to_numpy()}
     estabilidad = {f"init_{init}": tsne_stability(mapas[init][a], mapas[init][b],   # ADICIÓN 2: cuantifica qué
-                                                  sample["aeropuerto"].to_numpy(), y_sample.to_numpy())  # permanece y qué cambia
+                                                  sample["aeropuerto"].to_numpy(), y_sample.to_numpy(),  # permanece y
+                                                  extra=extras)                                         # qué cambia
                    for init in mapas}
     (SALIDA / "lab03_tsne_metricas.json").write_text(json.dumps(estabilidad, indent=2), encoding="utf-8")
     for nombre, valores in estabilidad.items():
         print(f"== t-SNE {nombre} ==", {k: round(v, 3) for k, v in valores.items()})
-    aero_codigos = pd.Categorical(sample["aeropuerto"]).codes
-    fig, axes = plt.subplots(2, 2, figsize=(12, 10))          # ADICIÓN 3: segunda fila coloreada por aeropuerto
+    fig, axes = plt.subplots(3, 2, figsize=(12, 15))          # ADICIÓN 3: filas por aeropuerto y por mes
+    capas = [("alta_demanda", pd.Categorical(y_sample).codes, "viridis"),
+             ("aeropuerto", pd.Categorical(sample["aeropuerto"]).codes, "tab10"),
+             ("mes", pd.Categorical(sample["mes"]).codes, "tab20")]
     for col, seed in enumerate(cfg.TSNE_SEMILLAS):
         emb = mapas["random"][seed]
-        axes[0, col].scatter(emb[:, 0], emb[:, 1], c=pd.Categorical(y_sample).codes, s=12, cmap="viridis")
-        axes[0, col].set_title(f"t-SNE seed={seed} (init aleatorio) · color = alta_demanda")
-        axes[1, col].scatter(emb[:, 0], emb[:, 1], c=aero_codigos, s=12, cmap="tab10")
-        axes[1, col].set_title(f"t-SNE seed={seed} (init aleatorio) · color = aeropuerto")
+        for fila, (nombre, codigos, cmap) in enumerate(capas):
+            axes[fila, col].scatter(emb[:, 0], emb[:, 1], c=codigos, s=12, cmap=cmap)
+            axes[fila, col].set_title(f"t-SNE seed={seed} (init aleatorio) · color = {nombre}")
     plt.tight_layout(); plt.savefig(SALIDA / "tsne_two_seeds.png", dpi=160); plt.close(fig)
 
     # 6. Calcular la frontera de Pareto para los modelos entrenados -----------------------------
@@ -243,8 +246,10 @@ if SELECCION:
                    c=results[bandera].map({True: "#0f7c7b", False: "#94a3b8"}))
         frontera = results[results[bandera]].sort_values(costo)
         ax.step(frontera[costo], frontera.f1_macro, where="post", color="#0f7c7b", alpha=.5, zorder=2)
+        desplazamiento = {"svm_c1": (-34, -16), "svm_c10": (6, 8), "svm_pca": (-8, -15)}   # evita rótulos encimados
         for _, r in results.iterrows():
-            ax.annotate(r.model, (r[costo], r.f1_macro), fontsize=8, xytext=(4, 4), textcoords="offset points")
+            ax.annotate(r.model, (r[costo], r.f1_macro), fontsize=8,
+                        xytext=desplazamiento.get(r.model, (4, 4)), textcoords="offset points")
         e = results[results.elegido].iloc[0]
         ax.scatter([e[costo]], [e.f1_macro], s=260, facecolors="none", edgecolors="#c2410c", linewidths=2, zorder=4)
         ax.set_xscale("log"); ax.set_xlabel(etiqueta); ax.grid(alpha=.3)

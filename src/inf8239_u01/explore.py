@@ -84,7 +84,7 @@ def tsne_embeddings(matriz, seeds=cfg.TSNE_SEMILLAS,
     }
 
 
-def tsne_stability(emb_a, emb_b, aeropuerto, y, k: int = 10) -> dict:
+def tsne_stability(emb_a, emb_b, aeropuerto, y, k: int = 10, extra: dict | None = None) -> dict:
     """Cuantifica qué permanece y qué cambia entre dos mapas t-SNE.
 
     - vecinos_compartidos: de los k vecinos de cada punto en un mapa, qué
@@ -93,6 +93,9 @@ def tsne_stability(emb_a, emb_b, aeropuerto, y, k: int = 10) -> dict:
       Se compara con el nivel esperado por azar.
     - disparidad_procrustes: cuánto difieren los mapas tras rotarlos y
       escalarlos al máximo parecido (0 = idénticos). Captura lo que cambia.
+    - extra: {nombre: etiquetas} opcional; agrega pureza_<nombre>_mapa_a/b y
+      azar_<nombre> (p. ej. mes o día de la semana) para ver qué variable
+      organiza el mapa.
     """
     def vecinos(emb):
         return NearestNeighbors(n_neighbors=k + 1).fit(emb).kneighbors(
@@ -109,6 +112,12 @@ def tsne_stability(emb_a, emb_b, aeropuerto, y, k: int = 10) -> dict:
         return float(np.sum((conteos / conteos.sum()) ** 2))
 
     aeropuerto, y = np.asarray(aeropuerto), np.asarray(y)
+    adicionales = {}
+    for nombre, etiquetas in (extra or {}).items():
+        etiquetas = np.asarray(etiquetas)
+        adicionales[f"pureza_{nombre}_mapa_a"] = pureza(va, etiquetas)
+        adicionales[f"pureza_{nombre}_mapa_b"] = pureza(vb, etiquetas)
+        adicionales[f"azar_{nombre}"] = azar(etiquetas)
     return {
         "vecinos_compartidos": float(compartidos),
         "pureza_aeropuerto_mapa_a": pureza(va, aeropuerto),
@@ -118,4 +127,5 @@ def tsne_stability(emb_a, emb_b, aeropuerto, y, k: int = 10) -> dict:
         "pureza_target_mapa_b": pureza(vb, y),
         "azar_target": azar(y),
         "disparidad_procrustes": float(procrustes(emb_a, emb_b)[2]),
+        **adicionales,
     }

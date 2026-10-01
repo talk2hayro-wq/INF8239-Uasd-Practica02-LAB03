@@ -56,3 +56,12 @@ def test_tsne_seed_matters_with_random_init_but_not_with_pca_init():
     dif_pca = explore.tsne_stability(determinista[42], determinista[7], aero, y_m, k=5)
     assert dif_aleatorio["disparidad_procrustes"] > 1e-3   # la semilla cambia el mapa
     assert dif_pca["disparidad_procrustes"] < 1e-6         # con init="pca" los mapas son idénticos
+
+
+def test_tsne_stability_reports_purity_for_extra_labels():
+    rng = np.random.default_rng(0)
+    emb = rng.normal(size=(60, 2))
+    etiquetas = np.repeat([0, 1, 2], 20)
+    m = explore.tsne_stability(emb, emb, etiquetas, etiquetas, extra={"mes": etiquetas})
+    assert {"pureza_mes_mapa_a", "pureza_mes_mapa_b", "azar_mes"} <= set(m)
+    assert m["azar_mes"] == pytest.approx(1 / 3)
