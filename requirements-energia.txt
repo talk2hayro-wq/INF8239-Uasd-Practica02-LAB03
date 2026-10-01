@@ -1,0 +1,2 @@
+# Solo para lab03_energia.py (estimación de energía y CO2eq)
+codecarbon>=3.0
