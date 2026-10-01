@@ -1,0 +1,51 @@
+{
+  "modelo_elegido": "svm_c1",
+  "evaluaciones_de_la_prueba": 1,
+  "filas_prueba": 3627,
+  "metricas_prueba": {
+    "f1_macro": 0.7615,
+    "f1_alta": 0.6256,
+    "precision_alta": 0.7372,
+    "recall_alta": 0.5434,
+    "accuracy": 0.839,
+    "roc_auc": 0.8655,
+    "tn": 2555.0,
+    "fp": 174.0,
+    "fn": 410.0,
+    "tp": 488.0
+  },
+  "contexto_no_decisorio": {
+    "dummy": {
+      "f1_macro": 0.4294,
+      "f1_alta": 0.0,
+      "precision_alta": 0.0,
+      "recall_alta": 0.0,
+      "accuracy": 0.7524,
+      "roc_auc": 0.5,
+      "tn": 2729.0,
+      "fp": 0.0,
+      "fn": 898.0,
+      "tp": 0.0
+    },
+    "svm_lab02": {
+      "f1_macro": 0.7595,
+      "f1_alta": 0.6249,
+      "precision_alta": 0.7139,
+      "recall_alta": 0.5557,
+      "accuracy": 0.8348,
+      "roc_auc": 0.8613,
+      "tn": 2529.0,
+      "fp": 200.0,
+      "fn": 399.0,
+      "tp": 499.0
+    }
+  },
+  "f1_macro_cv": 0.6944,
+  "f1_macro_cv_std": 0.0711,
+  "brecha_prueba_menos_cv_puntos": 6.72,
+  "dentro_de_1_desviacion_del_cv": true,
+  "consistencia_lab02": {
+    "f1_macro_prueba_lab02": 0.7595,
+    "f1_macro_prueba_recalculado": 0.7595
+  }
+}
