@@ -1,0 +1,10 @@
+model,familia,f1_macro,f1_macro_std,recall_alta,recall_alta_std,recall_macro,fit_median_s,fit_min_s,fit_max_s,predict_ms,size_kb,is_pareto,is_pareto_predict,is_pareto_size,is_pareto_all,elegido
+dummy,referencia,0.43,0.00687,0.0,0.0,0.5,0.01773,0.01731,0.01807,4.7176,4.1582,True,True,True,True,False
+logistic,lineal,0.53371,0.03702,0.17218,0.04727,0.54001,0.03368,0.03344,0.03395,4.87308,4.65039,True,True,True,True,False
+svm_c1,SVM,0.69438,0.07105,0.44897,0.07307,0.67771,5.05135,4.78024,5.32794,964.10454,1699.11523,True,False,False,True,True
+svm_c10,SVM,0.69514,0.06403,0.4918,0.05298,0.6852,9.20171,8.96367,9.2316,961.60184,1578.59961,False,True,True,True,False
+svm_c10_g01,SVM,0.69682,0.06743,0.47789,0.06033,0.68396,7.4874,6.73992,7.6169,1076.00421,1621.47461,True,True,True,True,False
+svm_c1_pca,SVM + PCA,0.67654,0.08755,0.40446,0.10631,0.65936,4.84684,4.52714,4.94081,979.85422,1427.44336,True,False,True,True,False
+rf_100,Random Forest,0.49295,0.04069,0.08131,0.05004,0.52421,0.41622,0.41517,0.41635,17.03914,2285.79199,False,False,False,False,False
+rf_300,Random Forest,0.49366,0.04438,0.08332,0.05606,0.52462,1.1784,1.07179,1.21123,32.69657,6876.72949,False,False,False,False,False
+boost,Boosting,0.6739,0.06703,0.41767,0.06498,0.65864,0.38464,0.34405,0.38908,12.75742,363.46289,True,True,True,True,False

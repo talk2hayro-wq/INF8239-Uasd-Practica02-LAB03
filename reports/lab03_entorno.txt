@@ -1,0 +1,8 @@
+python: 3.11.15 (main, Mar  3 2026, 09:26:23) [GCC 13.3.0]
+sistema: Linux-6.18.44-fc-v50-x86_64-with-glibc2.39
+procesador: x86_64
+nucleos_logicos: 2
+hilos_usados_en_mediciones: 1
+scikit-learn: 1.8.0
+pandas: 3.0.2
+numpy: 2.4.4
