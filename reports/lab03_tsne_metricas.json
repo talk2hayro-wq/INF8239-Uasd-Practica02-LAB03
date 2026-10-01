@@ -1,0 +1,34 @@
+{
+  "init_random": {
+    "vecinos_compartidos": 0.7226000000000001,
+    "pureza_aeropuerto_mapa_a": 0.4245,
+    "pureza_aeropuerto_mapa_b": 0.4373,
+    "azar_aeropuerto": 0.148048,
+    "pureza_target_mapa_a": 0.665,
+    "pureza_target_mapa_b": 0.669,
+    "azar_target": 0.6190720000000001,
+    "disparidad_procrustes": 0.143957859672406,
+    "pureza_mes_mapa_a": 1.0,
+    "pureza_mes_mapa_b": 1.0,
+    "azar_mes": 0.08419000000000001,
+    "pureza_dia_semana_mapa_a": 0.6333,
+    "pureza_dia_semana_mapa_b": 0.6306,
+    "azar_dia_semana": 0.144024
+  },
+  "init_pca": {
+    "vecinos_compartidos": 1.0,
+    "pureza_aeropuerto_mapa_a": 0.4686,
+    "pureza_aeropuerto_mapa_b": 0.4686,
+    "azar_aeropuerto": 0.148048,
+    "pureza_target_mapa_a": 0.6755,
+    "pureza_target_mapa_b": 0.6755,
+    "azar_target": 0.6190720000000001,
+    "disparidad_procrustes": 2.9689695531879596e-31,
+    "pureza_mes_mapa_a": 1.0,
+    "pureza_mes_mapa_b": 1.0,
+    "azar_mes": 0.08419000000000001,
+    "pureza_dia_semana_mapa_a": 0.5935,
+    "pureza_dia_semana_mapa_b": 0.5935,
+    "azar_dia_semana": 0.144024
+  }
+}
