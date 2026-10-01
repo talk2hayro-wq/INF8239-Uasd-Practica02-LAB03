@@ -34,13 +34,19 @@ def build_svm(C=1.0, gamma="scale"):
     ])
 
 
-def build_preprocess(cat_cols=None, num_cols=None) -> ColumnTransformer:
-    """Imputación + one-hot para categóricas; imputación + escalado para numéricas."""
+def build_preprocess(cat_cols=None, num_cols=None, dense: bool = False) -> ColumnTransformer:
+    """Imputación + one-hot para categóricas; imputación + escalado para numéricas.
+
+    dense=False (LAB02): el one-hot puede salir como matriz dispersa.
+    dense=True (LAB03): salida SIEMPRE densa, porque HistGradientBoosting y PCA
+    la exigen. Con este dataset el costo es pequeño (~3.5 MB; ver
+    reports/lab03_memoria_densa.csv), pero se mide en lugar de suponerlo.
+    """
     cat_cols = list(FEATURES_CAT if cat_cols is None else cat_cols)
     num_cols = list(FEATURES_NUM if num_cols is None else num_cols)
     cat_pipe = Pipeline([
         ("imputer", SimpleImputer(strategy="most_frequent")),
-        ("onehot", OneHotEncoder(handle_unknown="ignore")),
+        ("onehot", OneHotEncoder(handle_unknown="ignore", sparse_output=not dense)),
     ])
     num_pipe = Pipeline([
         ("imputer", SimpleImputer(strategy="median")),
@@ -49,7 +55,7 @@ def build_preprocess(cat_cols=None, num_cols=None) -> ColumnTransformer:
     return ColumnTransformer([
         ("cat", cat_pipe, cat_cols),
         ("num", num_pipe, num_cols),
-    ])
+    ], sparse_threshold=0.0 if dense else 0.3)
 
 
 def build_dummy() -> Pipeline:

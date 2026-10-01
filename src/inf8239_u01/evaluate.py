@@ -18,6 +18,8 @@ def evaluate(model, X, y) -> dict:
     auc = None
     if hasattr(model, "decision_function"):
         auc = float(roc_auc_score(y, model.decision_function(X)))
+    elif hasattr(model, "predict_proba"):
+        auc = float(roc_auc_score(y, model.predict_proba(X)[:, 1]))
     return {
         "f1_macro": float(f1_score(y, pred, average="macro")),
         "f1_alta": float(f1_score(y, pred, pos_label=1, zero_division=0)),

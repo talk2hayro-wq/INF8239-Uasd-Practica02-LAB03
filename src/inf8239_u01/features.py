@@ -57,3 +57,11 @@ def temporal_split(df: pd.DataFrame, test_start_year: int = TEST_START_YEAR):
     if train[TARGET].nunique() < 2:
         raise ValueError("El entrenamiento no contiene las dos clases")
     return train[FEATURES], test[FEATURES], train[TARGET], test[TARGET]
+
+
+def train_split(df: pd.DataFrame, test_start_year: int = TEST_START_YEAR):
+    """Devuelve SOLO el entrenamiento (X_train, y_train), con la misma partición
+    temporal de LAB02. La prueba no se devuelve: así la etapa de selección no
+    puede tocarla ni por accidente."""
+    X_train, _, y_train, _ = temporal_split(df, test_start_year)
+    return X_train, y_train
